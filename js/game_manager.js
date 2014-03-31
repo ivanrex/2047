@@ -251,7 +251,7 @@ GameManager.prototype.findFarthestPosition = function (cell, vector) {
     }
   } while (this.grid.cellAvailable(cell));
   */
-  while (this.grid.withinBounds(cell) && this.grid.cellAvailable(cell));
+  } while (this.grid.withinBounds(cell) && this.grid.cellAvailable(cell));
   return {
     farthest: previous,
     next: cell // Used to check if a merge is required
