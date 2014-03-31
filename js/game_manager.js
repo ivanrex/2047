@@ -235,6 +235,7 @@ GameManager.prototype.findFarthestPosition = function (cell, vector) {
   do {
     previous = cell;
     cell     = { x: previous.x + vector.x, y: previous.y + vector.y };
+    /*
     // to facilitate the wrapping function
     if (!this.grid.withinBounds(cell)) {
       cell = this.grid.findWrappingNext(cell);
@@ -249,7 +250,8 @@ GameManager.prototype.findFarthestPosition = function (cell, vector) {
         break;
     }
   } while (this.grid.cellAvailable(cell));
-
+  */
+  while (this.grid.withinBounds(cell) && this.grid.cellAvailable(cell));
   return {
     farthest: previous,
     next: cell // Used to check if a merge is required
