@@ -250,8 +250,10 @@ GameManager.prototype.findFarthestPosition = function (cell, vector) {
         break;
     }
   } while (this.grid.cellAvailable(cell));
+  
   */
   } while (this.grid.withinBounds(cell) && this.grid.cellAvailable(cell));
+  
   return {
     farthest: previous,
     next: cell // Used to check if a merge is required
@@ -273,7 +275,7 @@ GameManager.prototype.tileMatchesAvailable = function () {
       tile = this.grid.cellContent({ x: x, y: y });
 
       if (tile) {
-        for (var direction = 0; direction < 4; direction++) {
+        for (var direction = 0; direction < 8; direction++) {
           var vector = self.getVector(direction);
           var cell   = { x: x + vector.x, y: y + vector.y };
 

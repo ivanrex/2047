@@ -100,7 +100,7 @@ Grid.prototype.withinBounds = function (position) {
 };
 
 Grid.prototype.findWrappingNext = function (position) {
-  res = {x : 0, y : 0};
+  var res = {x : position.x, y : position.y};
   if (position.x >= this.size) {
     res.x = position.x - this.size;
   }
