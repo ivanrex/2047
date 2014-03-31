@@ -127,24 +127,30 @@ KeyboardInputManager.prototype.listen = function () {
         }else{
           direction = 2;
         }
-      }else if(absDy * ratio < absDx && absDx * ratio < absDy){
+      }
+      else if(absDy * ratio < absDx && absDx * ratio < absDy){
         if(dy < 0 && dx > 0){
           direction = 7;
-        }else if(dy > 0 && dx > 0){
+        }
+        else if(dy > 0 && dx > 0){
           direction = 5;
-        }else if(dy > 0 && dx < 0){
+        }
+        else if(dy > 0 && dx < 0){
           direction = 4;
-        }else{
+        }
+        else{
           direction = 6;
         }
-      }else{
+      }
+      else{
         if(dx > 0){
           direction = 1;
         }else{
           direction = 3;
         }
-        
-  self.emit("move", direction);
+      }
+    self.emit("move", direction);
+    }
   });
 };
 
