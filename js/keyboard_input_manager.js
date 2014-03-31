@@ -39,14 +39,10 @@ KeyboardInputManager.prototype.listen = function () {
     39: 1, // Right
     40: 2, // Down
     37: 3, // Left
-    75: 0, // Vim up
-    76: 1, // Vim right
-    74: 2, // Vim down
-    72: 3, // Vim left
-    87: 0, // W
-    68: 1, // D
-    83: 2, // S
-    65: 3  // A
+    81: 4, // Q upper left
+    87: 5, // W upper right
+    65: 6, // A lower left
+    83: 7  // S lower right
   };
 
   // Respond to direction keys
@@ -119,11 +115,36 @@ KeyboardInputManager.prototype.listen = function () {
 
     var dy = touchEndClientY - touchStartClientY;
     var absDy = Math.abs(dy);
+    
+    var ratio = 0.5579; // 3 ^ 0.5 / 2
 
     if (Math.max(absDx, absDy) > 10) {
       // (right : left) : (down : up)
-      self.emit("move", absDx > absDy ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0));
-    }
+      var direction = 0;
+      if(absDy * ratio > absDx){
+        if(dy < 0){
+          direction = 0;
+        }else{
+          direction = 2;
+        }
+      }else if(absDy * ratio < absDx && absDx * ratio < absDy){
+        if(dy < 0 && dx > 0){
+          direction = 5;
+        }else if(dy > 0 && dx > 0){
+          direction = 7;
+        }else if(dy > 0 && dx < 0){
+          direction = 6;
+        }else{
+          direction = 4;
+        }
+      }else{
+        if(dx > 0){
+          direction = 1;
+        }else{
+          direction = 3;
+        }
+        
+  self.emit("move", direction);
   });
 };
 
