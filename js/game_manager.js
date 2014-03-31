@@ -229,13 +229,26 @@ GameManager.prototype.buildTraversals = function (vector) {
 
 GameManager.prototype.findFarthestPosition = function (cell, vector) {
   var previous;
+  var origCell = cell;
 
   // Progress towards the vector direction until an obstacle is found
   do {
     previous = cell;
     cell     = { x: previous.x + vector.x, y: previous.y + vector.y };
-  } while (this.grid.withinBounds(cell) &&
-           this.grid.cellAvailable(cell));
+    // to facilitate the wrapping function
+    if (!this.grid.withinBounds(cell)) {
+      cell = this.grid.findWrappingNext(cell);
+    }
+    if (cell.x === origCell.x && cell.y === origCell.y) {
+        // looping back to the same spot
+        do {
+          previous = cell;
+          cell     = { x: previous.x + vector.x, y: previous.y + vector.y };
+        } while (this.grid.withinBounds(cell) &&
+                 this.grid.cellAvailable(cell));
+        break;
+    }
+  } while (this.grid.cellAvailable(cell));
 
   return {
     farthest: previous,
