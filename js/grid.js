@@ -99,6 +99,23 @@ Grid.prototype.withinBounds = function (position) {
          position.y >= 0 && position.y < this.size;
 };
 
+Grid.prototype.findWrappingNext = function (position) {
+  res = {x : 0, y : 0};
+  if (position.x >= this.size) {
+    res.x = position.x - this.size;
+  }
+  if (position.y >= this.size) {
+    res.y = position.y - this.size;
+  }
+  if (position.x < 0) {
+    res.x = position.x + this.size;
+  }
+  if (position.y < 0) {
+    res.y = position.y + this.size;
+  }
+  return res;
+};
+
 Grid.prototype.serialize = function () {
   var cellState = [];
 
