@@ -130,16 +130,16 @@ KeyboardInputManager.prototype.listen = function () {
       }
       else if(absDy * ratio < absDx && absDx * ratio < absDy){
         if(dy < 0 && dx > 0){
-          direction = 7;
-        }
-        else if(dy > 0 && dx > 0){
           direction = 5;
         }
+        else if(dy > 0 && dx > 0){
+          direction = 7;
+        }
         else if(dy > 0 && dx < 0){
-          direction = 4;
+          direction = 6;
         }
         else{
-          direction = 6;
+          direction = 4;
         }
       }
       else{
